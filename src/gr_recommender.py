@@ -56,10 +56,13 @@ def fill_real_ratings(scores, user_reviews):
     scores[nnz] = user_reviews[nnz]
     return scores
 
-def filter_cities_and_categories(scores, businesses, cities, categories):
+def filter_cities_and_categories(scores, businesses, cities, categories, bus_idx = None):
     inds = []
     original_inds = {}
-    for i, b in enumerate(businesses):
+    for i, b in enumerate(np.arange(scores.shape[0])):
+        if bus_idx is not None:
+            b = bus_idx[b]
+        b = businesses[b]
         b_cats = np.array([c.category for c in b.categories])
         if np.isin(b.city, cities).any() and np.isin(categories, b_cats).all():
             original_inds[len(inds)] = i
@@ -118,10 +121,13 @@ def get_recommendations(user_ids, N, M, city='Las Vegas', factorization_file='fa
     result = mc.simulate_markov_chains(n, n * 2, rankings)
     return result
 
-def get_most_rated_city(user_ids, R, businesses):
+def get_most_rated_city(user_ids, R, businesses, bus_idx = None):
     rated = R[:,user_ids].nonzero()[0]
-    return Counter([b.city for b in np.array(businesses)[rated]]).most_common(1)[0][0]
-
+    if bus_idx is None:
+        return Counter([b.city for b in np.array(businesses)[rated]]).most_common(1)[0][0]
+    else:
+        return Counter([b.city for b in np.array(businesses)[bus_idx[rated]]]).most_common(1)[0][0]
+    
 class GroupRecommender:
     def __init__(self, N=100000, M=100000, factorization_file='factorized_location.pickle', db=None):
         if db is None:
