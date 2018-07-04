@@ -18,7 +18,6 @@
 %\usepackage[colorlinks=true, allcolors=black]{hyperref}
 \usepackage[linesnumbered,ruled]{algorithm2e}
 
-%\title{Group Recommendation on Yelp Dataset with Markov Chain Monte Carlo and Collaborative Filtering}
 \title{Group Recommendation based on Collaborative Filtering and Markov Chains}
 
 \author{ {\rm Nicholas Gao, Evin Pinar Örnek, Jan Sültemeyer} \\ \textit{Technical University of Munich}}
@@ -356,12 +355,6 @@ As a baseline for comparison we use the user mean as prediction for each restaur
 
 While this seems like a small difference, we investigated this phenomenon further and analyzed the  results of Ma, et al. \cite{Ma08} -- they use four different matrix factorization algorithm. We compared thir results with the prediction of the user mean and noticed that three out of these four methods actually performed worse than the mean prediction. Predicting the mean gave us for an 80\% training-test split a mean absolute error of 0.97. The presented methods, reported errors of 1.0371, 1.0277, 0.9998 and 0.9321.
 
-%\begin{figure}[h]
-%\centering
-%\includegraphics[width=0.9\textwidth]{table_MF.png}
-%\caption{\label{fig:MF_table}This frog was uploaded via the project menu.}
-%\end{figure}
-
 \subsection{Rank Aggregation Methods}
 
 In order to test our Markov Chain Aggregation algorithm, we chose a group of $N=10$ users and compared our results with other aggregation algorithms: Borda Count and rank averaging. The results can be seen in figure \ref{fig:kendalltau}. 
@@ -388,7 +381,6 @@ Due to the lack of time, an extensive evaluation of this work is missing. We pro
 
 \section{Conclusion}\label{sec:Conclusion}
 In this work we presented a multi-stage model for group recommendation based on collaborative filtering and Markov Chain simulations. We analyzed the performance for individual parts of our collaborative filtering and came up the best performing method. While doing so we showed the quality of predicting a user's mean rating in terms of RMSE. Furthermore, we evaluated our solution for the rank aggregation problem as well as the whole pipeline in different scenarios. While the individual parts of our model performed really well in their domains, we were only able to report good results for our basic test for the whole pipeline. Further evaluation on our model is needed to conduct final results.
-%Either our data is weird or Collaborative Filtering does not work
 
 \bibliographystyle{plain}
 \bibliography{sample}

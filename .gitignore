@@ -4,3 +4,7 @@
 *.db
 *.pickle
 
+*.aux
+*.fdb_latexmk
+*.synctex*
+*.out
